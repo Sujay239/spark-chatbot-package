@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Spark Chatbot — Embedded Component</title>
+    <link
+      rel="shortcut icon"
+      href="https://res.cloudinary.com/din7hkzcq/image/upload/v1786026169/Untitled_design_74_jyvfu3.png"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="spark-chatbot.css" />
+  </head>
+
+  <body class="pmt-theme-light">
+    <div
+      class="pmt-shell open"
+      id="pmtShell"
+      role="region"
+      aria-label="Spark, the Pain Management Technologies Assistant"
+    >
+      <!-- Compact controls only. The existing paintechnology.com/spark page supplies the Spark header. -->
+      <div class="spark-embed-tools">
+        <button
+          class="spark-tool"
+          onclick="window.pmtWidgetActions.openContact()"
+          type="button"
+          title="Talk to a Human"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="vertical-align: -2px; margin-right: 4px"
+          >
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path
+              d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"
+            ></path></svg
+          >Talk to a Human
+        </button>
+        <button class="spark-tool" id="btnClear" type="button">
+          Clear conversation
+        </button>
+      </div>
+      <div class="pmt-body">
+        <div class="pmt-screen" id="screen" role="log" aria-live="polite"></div>
+        <div class="composer">
+          <div class="composerMain">
+            <textarea
+              id="chatInput"
+              rows="1"
+              placeholder="Ask Spark a question"
+            ></textarea>
+          </div>
+          <button class="send" id="btnSend" title="Send message">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="transform: translateX(-1px)"
+            >
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contact Form Modal -->
+      <div class="pmt-contact-overlay" id="pmtContactOverlay">
+        <div class="pmt-contact-card">
+          <div class="pmt-contact-header">
+            <h2>Talk to a Human</h2>
+            <button
+              class="pmt-contact-close"
+              id="pmtContactClose"
+              title="Close"
+            >
+              ✕
+            </button>
+          </div>
+          <form class="pmt-contact-form" id="pmtContactForm" novalidate>
+            <div class="pmt-form-row">
+              <div class="pmt-form-group">
+                <label for="pmtFirstName">First Name</label>
+                <input
+                  type="text"
+                  id="pmtFirstName"
+                  placeholder="John"
+                  autocomplete="given-name"
+                />
+                <span class="pmt-form-error" id="errFirstName"></span>
+              </div>
+              <div class="pmt-form-group">
+                <label for="pmtLastName">Last Name</label>
+                <input
+                  type="text"
+                  id="pmtLastName"
+                  placeholder="Doe"
+                  autocomplete="family-name"
+                />
+                <span class="pmt-form-error" id="errLastName"></span>
+              </div>
+            </div>
+            <div class="pmt-form-group">
+              <label for="pmtEmail">Email</label>
+              <input
+                type="email"
+                id="pmtEmail"
+                placeholder="john@example.com"
+                autocomplete="email"
+              />
+              <span class="pmt-form-error" id="errEmail"></span>
+            </div>
+            <div class="pmt-form-group">
+              <label for="pmtPhone">Phone Number</label>
+              <input
+                type="tel"
+                id="pmtPhone"
+                placeholder="(555) 123-4567"
+                autocomplete="tel"
+              />
+              <span class="pmt-form-error" id="errPhone"></span>
+            </div>
+            <div class="pmt-form-group">
+              <label for="pmtMessage">Message</label>
+              <textarea
+                id="pmtMessage"
+                rows="3"
+                placeholder="How can we help you?"
+              ></textarea>
+              <span class="pmt-form-error" id="errMessage"></span>
+            </div>
+            <button
+              type="submit"
+              class="pmt-contact-submit"
+              id="pmtContactSubmit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="spark-chatbot.js"></script>
+  </body>
+</html>

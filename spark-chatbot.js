@@ -1,0 +1,1216 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const CATEGORIES = [
+    {
+      key: "ultima5-start",
+      title: "Getting Started with Ultima 5",
+      sub: "Setup, channels, first-session settings, and getting started",
+    },
+    {
+      key: "ultima5-use",
+      title: "Using Your Ultima 5",
+      sub: "Modes, intensity, timer, waveform, and device controls",
+    },
+    {
+      key: "placement",
+      title: "Pad Placement",
+      sub: "Where and how to place electrodes for TENS treatment",
+    },
+    {
+      key: "treatment",
+      title: "Treatment & Pain Relief",
+      sub: "How TENS works, treatment time, frequency, and pain relief",
+    },
+    {
+      key: "ultima5-troubleshooting",
+      title: "Troubleshooting Ultima 5",
+      sub: "No sensation, flashing channels, charger, and device issues",
+    },
+    {
+      key: "electrodes",
+      title: "Electrode Pads & Accessories",
+      sub: "Pad life, compatibility, cleaning, and replacement electrodes",
+    },
+    {
+      key: "batteries",
+      title: "Batteries & Power",
+      sub: "Battery types, battery life, and rechargeable batteries",
+    },
+    {
+      key: "safety",
+      title: "Safety & Precautions",
+      sub: "Pacemakers, pregnancy, medical conditions, and cautions",
+    },
+    {
+      key: "care",
+      title: "Care & Maintenance",
+      sub: "Cleaning, storage, and post-treatment care",
+    },
+    {
+      key: "support",
+      title: "Product & Support",
+      sub: "General product, prescription, and support questions",
+    },
+    {
+      key: "if4d",
+      title: "Interferential Therapy / IF4D",
+      sub: "IFC basics, IF4D settings, session time, and electrode placement",
+    },
+  ];
+
+  const CATEGORY_QUESTIONS = {
+    "ultima5-start": [
+      "What is the Ultima 5 (U5)?",
+      "What comes in my Ultima 5 kit?",
+      "How do I set up the Ultima 5?",
+      "What do CH1 and CH2 mean on my Ultima 5?",
+      "Can I use only two electrode pads with my Ultima 5?",
+      "How do I turn my Ultima 5 on and off?",
+      "What settings should I use for my very first Ultima 5 session?",
+      "What's different between the current Ultima 5 and the earlier model?",
+      "Where can I learn more about my Ultima 5?",
+    ],
+    "ultima5-use": [
+      "How do I use a TENS unit, step by step?",
+      "Can I use more than one channel at a time?",
+      "Which mode should I use?",
+      "How high should I turn up the intensity?",
+      "Should the stimulation feel strong or gentle?",
+      "What program should I use for my condition?",
+      "How many minutes should I do per session?",
+      "What wave forms does the Ultima 5 offer, and which one should I use?",
+      "Why does the intensity reset to zero when I switch modes?",
+      "Does my Ultima 5 remember my last settings when I turn it back on?",
+      "What is the auto-repeat feature when adjusting pulse rate or pulse width?",
+      "How do the intensity knobs work on my Ultima 5?",
+      "What does the Compliance Monitor track, and why does it matter?",
+      "What is the Lock/Unlock feature, and how do I use it?",
+      "How do I change the waveform on my Ultima 5?",
+      "How do I set the treatment timer on my Ultima 5?",
+    ],
+    placement: [
+      "How should I approach electrode placement?",
+      "Where should I place the pads for lower back pain?",
+      "Where do I put the pads for neck pain?",
+      "Can I place the pads directly over where the pain is?",
+      "Can the pads touch each other?",
+      "How far apart should the pads be?",
+      "How far apart should the electrode pads be on my Ultima 5?",
+    ],
+    treatment: [
+      "How does a TENS unit work?",
+      "What does a TENS unit actually do?",
+      "What does a TENS unit feel like?",
+      "What are the theories behind how TENS units work?",
+      "Does TENS actually work?",
+      "How long does it take to feel relief?",
+      "Is pain relief immediate or temporary?",
+      "Does TENS help reduce inflammation?",
+      "What pain conditions does TENS help with?",
+      "What frequency is best for chronic pain?",
+      "What frequency works best for acute pain?",
+      "Can I use a TENS unit every day?",
+      "How often should I use a TENS unit?",
+      "Can I use TENS more than once a day?",
+      "Can I wear a TENS unit all day?",
+      "Why does the sensation fade after a few minutes?",
+      "Will my body get used to TENS?",
+      "How do I maximize pain relief?",
+      "What's the difference between TENS and EMS?",
+      "Can one device do both TENS and EMS?",
+      "Can TENS help me avoid pain medication?",
+      "Can TENS speed up healing or does it only mask pain?",
+    ],
+    "ultima5-troubleshooting": [
+      "Why don't I feel anything when I turn on my Ultima 5?",
+      "Why is CH1 or CH2 flashing on my Ultima 5?",
+      "How do I turn Pad Contact Detection on or off?",
+      "Why can't I change the intensity on my Ultima 5?",
+      "Why isn't my TENS unit producing sensation?",
+      "Does the red light on the charger go out?",
+      "How do you know when the batteries are charged?",
+      "Why am I not feeling sensation?",
+      "Why does the stimulation seem weak?",
+      "Why is only one pad working?",
+      "Why does the stimulation feel sharp instead of comfortable?",
+      "Stimulation feels sharp or uncomfortable",
+      "Why does the intensity suddenly decrease?",
+      "Why does intensity drop during use?",
+      "Why does my unit keep turning off?",
+      "Why won't my TENS unit turn on?",
+      "What are typical troubleshooting issues with TENS units?",
+      "What does the Pad Contact Interruption Alarm do on my Ultima 5?",
+      "How do I read the battery level indicator on my Ultima 5?",
+      "Does my Ultima 5 automatically shut off if I forget to turn it off?",
+    ],
+    electrodes: [
+      "What are Soft-Touch electrodes, and why do they matter?",
+      "What's the difference between the Soft-Touch Silver and Clinical Grade electrode lines?",
+      "How long do TENS pads last?",
+      "When should I replace the pads?",
+      "Why won't my pads stick anymore?",
+      "How do I make my pads sticky again?",
+      "Can I wash or clean electrode pads?",
+      "Are generic pads compatible with my unit?",
+      "What pads are compatible with my unit?",
+      "What's the difference between 2 inch and 4 inch pads?",
+      "How do I know which pads are best for me?",
+      "What accessories should I buy with a TENS unit?",
+    ],
+    batteries: [
+      "What batteries can I use in the Ultima 5?",
+      "How long does the battery last?",
+      "Should I buy a rechargable batteries?",
+    ],
+    safety: [
+      "Where should I never place TENS pads?",
+      "Is it safe to use a TENS unit while sleeping?",
+      "Can I drive while using a TENS unit?",
+      "Can I use TENS with a pacemaker?",
+      "Is a TENS unit safe to use during pregnancy?",
+      "Can I use a TENS unit if I have diabetes?",
+      "Can I use a TENS unit if I have metal implants?",
+      "Is there contradictions with medication?",
+      "Why does my skin turn red after treatment?",
+      "I am experiencing skin irritation -- why is that?",
+    ],
+    care: [
+      "What should I do with the electrode pads after treatment?",
+      "How do I clean and store the unit?",
+    ],
+    support: [
+      "What TENS unit is best for home use?",
+      "Is a prescription required?",
+    ],
+    if4d: [
+      "What is interferential therapy?",
+      "What is the difference between interferential therapy and TENS?",
+      "How long are interferential therapy sessions typically?",
+      "What is criss-cross pad application for interferential therapy?",
+      "What is the IF4D?",
+      "Can I use two or four electrodes with the IF4D?",
+      "What treatment settings does the IF4D offer?",
+      "What kind of waveform does the IF4D use?",
+      "What comes with the IF4D?",
+      "Can the IF4D run on batteries or wall power?",
+    ],
+  };
+
+  const KB_ANSWERS = {
+    "What is the Ultima 5 (U5)?":
+      "The Ultima 5 is PMT's dual-channel digital TENS unit, built for robust relief at home, work, or on the go. It offers 10 intensity levels, 9 preset modes (27 combinations), 3 wave forms, and a timer up to 60 minutes. A built-in Compliance Monitor and Pad Contact Alarm add extra confidence.",
+    "What comes in my Ultima 5 kit?":
+      'Your kit includes the TENS device, manual, Quick Start Guide, one pack of 2" square electrodes, an AA charger, two pairs of leadwires, two rechargeable Li-ion batteries, a soft carrying case, and an instruction card, everything you need for your first session.',
+    "How do I set up the Ultima 5?":
+      "Setting up your Ultima 5 is quick and easy: 1. Install the batteries: Insert the two charged AA batteries into the battery compartment, following the +/– markings, and replace the cover. 2. Connect the lead wires: Plug the L-shaped end of the lead wire into CH1 for two pads. If using four pads, connect both CH1 and CH2. 3. Connect the pads: Attach the pin ends of the lead wires to the electrode pads. 4. Place the pads: Make sure your skin is clean and dry. Remove the pads from their plastic backing and place them around the treatment area as directed. Pads from the same channel should not touch and should be no more than 6 inches apart. 5. Turn on the unit: Press and hold the Power button for about 3 seconds. The screen will light up and the intensity will start at zero. 6. Set your treatment: For the initial setup shown in the Ultima 5 Quick Start Guide, select 150 Hz pulse rate, 250 μs pulse width, 30–45 minutes, and the Asymmetrical Bi-Phasic Rectangular waveform. 7. Adjust the intensity: Slowly turn the intensity control for each active channel until the stimulation feels strong but comfortable. After treatment, turn the unit off before removing the pads. Place the pads back on their clear plastic backing and store them in the sealed bag. Tip: If you change the treatment mode, the Ultima 5 automatically resets the intensity to zero. Simply readjust it to a comfortable level.",
+    "What do CH1 and CH2 mean on my Ultima 5?":
+      "CH1 and CH2 are the Ultima 5's two stimulation channels. Each channel connects to one lead wire and can power two electrode pads. If you're using only two pads, connect the lead wire to CH1. If you're using four pads, connect one lead to CH1 and the other to CH2. Each channel has its own intensity control.",
+    "Can I use only two electrode pads with my Ultima 5?":
+      "Yes. You can use the Ultima 5 with two pads. Connect one lead wire to CH1 and attach the two electrode pads to that lead. If you want to use four pads, connect a second lead wire to CH2.",
+    "How do I turn my Ultima 5 on and off?":
+      "Press and hold the power button for about 3 seconds to turn your Ultima 5 on. You'll see the green LED light up along with the display, and intensity always starts at zero so you can ease in comfortably. To power down, press and hold the same button again for 3 seconds.",
+    "What settings should I use for my very first Ultima 5 session?":
+      "Your Quick Start Guide recommends a simple starting point: set the frequency to 150Hz, the pulse width to 250us, and the mode to Constant. Turn the intensity up to a level that feels strong but comfortable, and use the unit for 30-45 minutes, or as long as needed. For your wave form, start with the Asymmetrical Bi-Phasic Rectangular setting, it's the recommended starting point for initial treatment. From there, feel free to adjust based on comfort and results.",
+    "What's different between the current Ultima 5 and the earlier model?":
+      "Core performance is unchanged: dual channel, up to 130 mA, the same pulse width and rate range, 3 wave forms, and 9 modes. What's improved: more timer options (15-90 minutes plus continuous), a compliance lock feature, an upgraded carrying case, a manual with an electrode placement chart, and five color options instead of one.",
+    "Where can I learn more about my Ultima 5?":
+      "For additional resources and information beyond your manual and Quick Start Guide, you can visit paintechnology.com.",
+    "How do I use a TENS unit, step by step?":
+      "Start with clean, dry skin and a powered-off unit. Connect the lead wires to the device and pads, then place the pads around the painful area, not directly on the spine or joints. Turn the unit on, select your mode, and slowly increase the intensity until you feel a strong but comfortable tingling. Use the device for the recommended session time, then turn it off before removing the pads.",
+    "Can I use more than one channel at a time?":
+      "Yes, if your TENS unit has multiple channels, you can typically use more than one channel at the same time. Each channel controls a separate pair of electrode pads, allowing you to treat larger areas or multiple pain points simultaneously. For example: Channel 1: lower back; Channel 2: hip or leg. Start with low intensity on each channel and adjust gradually until the stimulation feels strong but comfortable.",
+    "Which mode should I use?":
+      "The best TENS mode depends on your type of pain and personal comfort level. Most TENS units offer multiple stimulation modes designed to deliver different pulse patterns. Common modes include: Continuous Mode (steady stimulation), Burst Mode (pulses delivered in short bursts), Modulation Mode (automatically varies the pulse pattern), Massage or Kneading Modes (rhythmic stimulation designed for comfort). If you are unsure, start with a continuous or standard mode and adjust the intensity until it feels strong but comfortable. You can experiment with other modes to find what provides the best relief.",
+    "How high should I turn up the intensity?":
+      "Set the intensity to a level that feels strong but comfortable. You should feel a noticeable tingling or pulsing sensation, but it should never feel painful, sharp, or burning. Start at a low level and slowly increase the intensity until the stimulation feels strong enough to provide relief without causing discomfort.",
+    "Should the stimulation feel strong or gentle?":
+      "TENS stimulation should feel strong but comfortable. You should notice a clear tingling or pulsing sensation, but it should never feel painful, sharp, or burning. If the sensation is too mild, you may not receive the full benefit. If it feels uncomfortable, reduce the intensity. The goal is a noticeable but comfortable stimulation.",
+    "What program should I use for my condition?":
+      "The best program depends on your type of pain and how your body responds to stimulation. Many TENS units include modes such as continuous, burst, modulation, or massage-style patterns. If you're unsure, start with a standard or continuous mode and adjust the intensity until it feels strong but comfortable. You can then try other modes to see which provides the most relief.",
+    "How many minutes should I do per session?":
+      "Most TENS sessions typically last 20-30 minutes, although some users may benefit from shorter or longer sessions depending on their pain and device instructions. Start with the recommended session time for your device and adjust based on comfort and results.",
+    "What wave forms does the Ultima 5 offer, and which one should I use?":
+      'You get three: asymmetrical, symmetrical, and monophasic. Switch between them by pressing "PR-" and "PW-" together. For your first session, start with asymmetrical bi-phasic rectangular, the recommended starting waveform in the Quick Start Guide.',
+    "Why does the intensity reset to zero when I switch modes?":
+      "That's normal and built in for safety. Any time you change modes, the Ultima 5 automatically drops the intensity to zero. Once you've selected the new mode, simply turn the intensity knobs back up to a strong but comfortable level.",
+    "Does my Ultima 5 remember my last settings when I turn it back on?":
+      "Yes. When you power it back on, it automatically returns to the mode you were using before you turned it off. Intensity will still start at zero on every power-up for safety.",
+    "What is the auto-repeat feature when adjusting pulse rate or pulse width?":
+      'Once you make your first adjustment to pulse rate or pulse width, you can hold the "PR+," "PR-," "PW+," or "PW-" button for about 1 second. The value will then automatically increase or decrease one step every quarter-second, making it easier to reach your desired setting.',
+    "How do the intensity knobs work on my Ultima 5?":
+      "There are two knobs on top of the unit, one for each channel. Turn a knob clockwise to increase intensity on that channel, or counterclockwise to decrease it. This lets you fine-tune each channel independently.",
+    "What does the Compliance Monitor track, and why does it matter?":
+      "It keeps a running total of your usage time, a simple way to track how consistently you're following your treatment plan. Press and hold the TIMER button to view your total accumulated usage time. To reset the total, press and hold MODE and TIMER together.",
+    "What is the Lock/Unlock feature, and how do I use it?":
+      "With the unit turned on, briefly press the Power button to activate the Lock function. This holds the current intensity in place so it can't be changed accidentally. Briefly press the Power button again to unlock it and make adjustments.",
+    "How do I change the waveform on my Ultima 5?":
+      "Press the PR- and PW- buttons simultaneously to change the waveform. The Ultima 5 offers three waveform options. For your initial treatment, the Quick Start Guide recommends the Asymmetrical Bi-Phasic Rectangular waveform.",
+    "How do I set the treatment timer on my Ultima 5?":
+      "Use the TIMER button to select your treatment time. Once the timer is set, it counts down in minutes. When it reaches zero, the Ultima 5 automatically stops the treatment.",
+    "How should I approach electrode placement?":
+      "Place electrode pads around or near the painful area, rather than directly on bones or joints. Pads should be placed on clean, dry skin with enough space between them to allow the electrical current to travel through the treatment area. Common placement strategies include: placing pads on both sides of the painful area, placing pads above and below the pain, surrounding a larger painful area with four pads. Avoid placing pads directly on the spine, head, throat, or broken skin.",
+    "Where should I place the pads for lower back pain?":
+      "For lower back pain, place the TENS pads on either side of the painful area, near the muscles surrounding the spine. Avoid placing pads directly over the spine or on bony areas. Common placements include: Two pads on each side of the lower back, above the hips or surrounding the area where you feel pain.",
+    "Where do I put the pads for neck pain?":
+      "For neck pain, place the TENS pads on the muscles along the sides and back of the neck, near the area of discomfort. Avoid placing pads directly on the front or sides of the throat, the head, or over the spine. Common placements include: one pad on each side of the neck muscles, or putting the pads above and below the painful area along the upper shoulders and neck.",
+    "Can I place the pads directly over where the pain is?":
+      "Yes. Tens PADS can often be placed near or around the area of pain to help target the nerves responsible for sending pain signals. For best results, place the pads on the muscles surrounding the painful area rather than directly on bones, joints, or the spine. Common approaches include: placing pads on both sides of the painful area, placing pads above and below the pain, or surrounding the painful area with four pads.",
+    "Can the pads touch each other?":
+      "No. TENS pads should not touch each other during use. Keep the pads separated by at least 1 inch, with 1-3 inches of spacing being common for most treatments. If the pads are too close together or touching, the electrical current may not flow effectively through the treatment area and could cause an uncomfortable sensation.",
+    "How far apart should the pads be?":
+      "TENS pads should generally be placed about 1-3 inches apart, depending on the size of the treatment area. For larger areas such as the lower back or shoulders, the pads may be spaced farther apart. For smaller areas, they can be closer together. Avoid placing the pads directly next to each other or allowing them to touch.",
+    "How far apart should the electrode pads be on my Ultima 5?":
+      "Per the Quick Start Guide, place the pads from each channel so they're straddling the area of pain, making sure the pads from each channel aren't touching one another and aren't more than 6 inches apart.",
+    "How does a TENS unit work?":
+      "A Transcutaneous Electrical Nerve Stimulation (TENS) unit is a small, battery-powered device that helps relieve pain by sending low-voltage electrical pulses through electrode pads placed on the skin. These gentle electrical impulses stimulate the nerves beneath the skin and can help reduce the way your body perceives pain.",
+    "What does a TENS unit actually do?":
+      "A TENS unit helps relieve pain by sending gentle electrical pulses through electrode pads placed on the skin. These pulses stimulate the nerves, helping block pain signals before they reach the brain, while also encouraging the release of endorphins - your body's natural pain relievers. A TENS unit is designed to manage pain, not cure underlying conditions. It can provide temporary relief from discomfort caused by conditions such as back pain, arthritis, sciatica, muscle soreness, and joint pain, making it easier to stay active and complete everyday tasks.",
+    "What does a TENS unit feel like?":
+      "Most users describe the sensation as: a gentle tingling, a light buzzing, mild tapping or pulsing, or a comfortable vibration. The intensity should be strong, but comfortable. A TENS unit should never be painful. If you experience sharp, burning, or uncomfortable sensations, reduce the intensity or check that the electrode pads are properly positioned and making good contact with your skin.",
+    "What are the theories behind how TENS units work?":
+      "TENS therapy is believed to help relieve pain through two main mechanisms: Gate Control Theory: electrical stimulation may help block pain signals from reaching the brain; Endorphin Release: TENS may stimulate the body's natural production of endorphins, which act as natural pain relievers. These mechanisms can work together to reduce how strongly pain is perceived.",
+    "Does TENS actually work?":
+      "TENS therapy has been used for decades as a non-invasive method for managing pain. Many people experience temporary relief from conditions such as back pain, arthritis, muscle soreness, and nerve pain. Results vary depending on the individual, the type of pain, electrode placement, and device settings. TENS is designed to help manage pain rather than cure the underlying condition.",
+    "How long does it take to feel relief?":
+      "Many users will experience relief within 5 to 15 minutes of starting a TENS session, while others may need several treatments before noticing consistent results. The amount of relief varies depending on the person, the type of pain, and the TENS setting being used. Some users will experience relief during treatment, while others may continue to feel the effects afterward.",
+    "Is pain relief immediate or temporary?":
+      "Many users will feel pain relief during or shortly after a TENS session. The relief is typically temporary and may last anywhere from minutes to several hours after treatment. Regular use may help manage recurring or chronic pain, but TENS does not cure the underlying cause of pain.",
+    "Does TENS help reduce inflammation?":
+      "TENS is not designed to directly reduce inflammation. Its primary purpose is to help manage pain by interrupting pain signals and stimulating the body's natural pain-relief response.",
+    "What pain conditions does TENS help with?":
+      "TENS can help with multiple conditions such as Sciatica, Plantar Fasciitis, Arthritis, Lower Back Pain, Neck Pain, Shoulder Pain, Joint Pain, Muscle Soreness, Knee Pain, and Nerve Pain. TENS therapy is designed to help manage pain, but it does not treat the underlying cause of the condition. Results vary from person to person.",
+    "What frequency is best for chronic pain?":
+      "For chronic pain, many TENS users find relief within lower frequencies (around 2-10 Hz) or moderate frequencies (around 50-100 Hz). Lower frequencies may produce a stronger pulsing sensation, while higher frequencies often feel smoother and more continuous. Because everyone responds differently, it's best to experiment with the available modes and frequencies on your TENS unit to find the setting that provides the most comfortable relief.",
+    "What frequency works best for acute pain?":
+      "For acute pain (new or short-term pain from an injury, procedure, or strain), higher-frequency TENS settings are commonly used. Typical frequency range: 80-120 Hz. Higher frequencies produce a smoother, more continuous tingling sensation and may help interrupt pain signals quickly. Start with a comfortable intensity and adjust the frequency or mode based on what feels most effective.",
+    "Can I use a TENS unit every day?":
+      "Yes, many people can use a TENS unit daily for pain management. Treatment frequency depends on your specific needs, the type of pain you are experiencing, and the recommendations provided with your device. For the best results, follow the reommended session times and avoid using TENS on irritated skin or the same area for extended periods without breaks.",
+    "How often should I use a TENS unit?":
+      "The frequency of TENS use depends on your pain level, condition, and personal response. Many users use a TENS unit once or multiple times per day for short sessions, typically lasting 20-30 minutes. For best results, use your TENS unit as needed and follow the recommended settings and guidelines provided with your device.",
+    "Can I use TENS more than once a day?":
+      "Yes, many people use TENS more than once per day, especially for chronic or recurring pain. Sessions are typically 20-30 minutes, with breaks between treatments. Avoid placing pads on irritated skin and give your skin time to rest between sessions.",
+    "Can I wear a TENS unit all day?":
+      "It is generally not recommended to wear a TENS unit continuously all day without breaks. Most treatments are performed in sessions lasting 20-30 minutes, although some users may use the device for longer periods depending on their needs. If you plan to use TENS frequently throughout the day, allow breaks between sessions and check your skin for irritation.",
+    "Why does the sensation fade after a few minutes?":
+      "It is common for the TENS sensation to feel less noticeable after a few minutes. This happens because your nerves can gradually adapt to the stimulation. If the sensation becomes too mild, you can slowly increase the intensity until you feel a strong but comfortable tingling again. Some TENS modes also automatically vary the pulse pattern to help prevent your body from becoming accustomed to the stimulation.",
+    "Will my body get used to TENS?":
+      "Over time, your nerves may adapt to a constant stimulation pattern, which can make the sensation feel weaker. Many TENS devices include modulation or variable modes that automatically change the pulse pattern to help reduce this effect. You can also slightly adjust the intensity or mode during treatment if the sensation becomes too mild.",
+    "How do I maximize pain relief?":
+      "To get the most from TENS therapy: Place pads around the painful area, use a strong but comfortable intensity, experiment with different modes, keep electrode pads clean and sticky, stay consistent with treatment. Everyone responds differently, so small adjustments to pad placement, intensity, and mode can help improve results.",
+    "What's the difference between TENS and EMS?":
+      "TENS (Transcutaneous Electrical Nerve Stimulation) is primarily designed to help relieve pain by stimulating nerves and interfering with pain signals. EMS (Electrical Muscle Stimulation) is designed to stimulate muscle contractions and is commonly used for muscle training, recovery, or rehabilitation. In simple terms: TENS = Pain Relief, EMS = Muscle Stimulation.",
+    "Can one device do both TENS and EMS?":
+      "Some electrotherapy devices combine both TENS and EMS functions, while others are designed specifically for one type of therapy. Combination devices allow users to switch between pain-relief programs (TENS) and muscle-stimulation programs (EMS). Check your device specifications to confirm which functions are available.",
+    "Can TENS help me avoid pain medication?":
+      "TENS may help some people reduce their reliance on pain medication by providing a non-drug option for managing pain. However, TENS should not be used as a replacement for prescribed medication without consulting a healthcare provider. It can often be used as part of a broader pain-management plan.",
+    "Can TENS speed up healing or does it only mask pain?":
+      "TENS is primarily designed to help manage pain rather than speed up tissue healing. By reducing pain, TENS may make it easier to move, exercise, or participate in rehabilitation, which can support recovery. However, the device itself does not directly repair injured tissue.",
+    "Why don't I feel anything when I turn on my Ultima 5?":
+      "This is usually normal. The Ultima 5 always starts with the stimulation intensity at zero. After turning it on and placing the pads correctly, slowly turn up the intensity knob for the active channel until you feel a strong but comfortable stimulation.",
+    "Why is CH1 or CH2 flashing on my Ultima 5?":
+      "If Pad Contact Detection is enabled, a flashing CH1 or CH2 means the Ultima 5 has detected poor contact between the electrode pads and your skin on that channel. Check that the pads are firmly attached and that the lead wires are fully connected. If poor contact continues for 3 seconds, intensity drops to 60%. If poor contact lasts more than 30 seconds, intensity resets to zero.",
+    "How do I turn Pad Contact Detection on or off?":
+      "Press and hold PR+ and MODE simultaneously to enable or disable Pad Contact Detection. The feature is disabled by default.",
+    "Why can't I change the intensity on my Ultima 5?":
+      "Check whether the Lock function is active. When the Ultima 5 is locked, the current intensity is held and cannot be adjusted. With the unit on, briefly press the Power button to toggle Lock/Unlock, then try adjusting the intensity again.",
+    "Why isn't my TENS unit producing sensation?":
+      "First check that the unit is powered on and the intensity level is turned up. Then check the electrode pads and lead wires. Common causes include: loose lead wire connections, pads not fully attached to the skin, worn or dried electrode pads, intensity set too low, or a damaged lead wire. Make sure the pads are firmly attached to clean, dry skin and slowly increase the intensity.",
+    "Does the red light on the charger go out?":
+      "The charger will consistently stay red. It will not change to green upon the full charge of the batteries. ",
+    "How do you know when the batteries are charged?":
+      "Our rechargable batteries work just like any other rechargable battery. You will typically want to charge these for 4-6 hours. ",
+    "Why am I not feeling sensation?":
+      "If you are not feeling stimulation, check the following: Make sure the unit is powered on, increase the intensity slowly, confirm the lead wires are fully connected, make sure the electrode pads are firmly attached to your skin, and check that the pads are not worn or dried out. If one channel is not working, try switching lead wires or pads to identify the problem.",
+    "Why does the stimulation seem weak?":
+      "Weak stimulation can be caused by: low intensity settings, worn electrode pads, loose lead wire connections, low battery power, or poor pad contact with the skin. Try increasing the intensity gradually and make sure the pads are firmly attached to clean, dry skin.",
+    "Why is only one pad working?":
+      "If only one pad appears to be working, the issue is usually related to the electrode pad or lead wire connection. Check that: Both pads are connected to the same lead wire, the lead wire is fully inserted into the device, the pad connectors are secure, and the pads are firmly attached to the skin. Try swapping the pads or lead wires to determine whether the issue is with the pad, cable, or device channel.",
+    "Why does the stimulation feel sharp instead of comfortable?":
+      "Sharp or stinging sensations are usually caused by poor electrode contact or worn pads. Check that: The pads are fully attached to the skin, the skin is clean and dry, the pads are not dried out, the pads are not damaged, and the intensity is not set too high. TENS stimulation should feel like a strong but comfortable tingling or pulsing sensation.",
+    "Stimulation feels sharp or uncomfortable":
+      "If the stimulation feels sharp, stinging, or uncomfortable, check the following: Make sure the electrode pads are fully attached to the skin, clean and dry the skin before applying pads, replace worn or dried pads, lower the intensity, and check the lead wire connections. TENS stimulation should feel like a strong but comfortable tingling or pulsing sensation.",
+    "Why does the intensity suddenly decrease?":
+      "Some TENS units automatically reduce intensity if they detect poor electrode contact or a loose connection. This safety feature helps prevent sudden or uncomfortable stimulation. Check that the electrode pads are firmly attached and the lead wires are securely connected.",
+    "Why does intensity drop during use?":
+      "Intensity may decrease if the device detects poor electrode contact or a loose connection. Some TENS units include safety features that automatically reduce stimulation when contact is lost. Make sure the pads are firmly attached and the lead wires are secure.",
+    "Why does my unit keep turning off?":
+      "A TENS unit may automatically shut off for several reasons: The treatment timer has ended, the battery is low, the pads are not making proper contact, or the device has an automatic safety shutoff. Check the battery level, pad placement, and lead wire connections before restarting the device.",
+    "Why won't my TENS unit turn on?":
+      "If your TENS unit will not power on: Check or replace the batteries, confirm the batteries are installed correctly, make sure the battery contacts are clean, and hold the power button for several seconds. If the unit still does not turn on, contact customer support.",
+    "What are typical troubleshooting issues with TENS units?":
+      "Common TENS troubleshooting issues include: No stimulation: check battery, intensity, pads, and lead wires. Weak stimulation: increase intensity or replace pads. Sharp or uncomfortable sensation: reposition or replace pads. Unit turns off: check the timer, battery, and pad contact. One channel not working: swap pads or lead wires to identify the issue. Most issues are related to electrode contact, batteries, or lead wire connections.",
+    "What does the Pad Contact Interruption Alarm do on my Ultima 5?":
+      "It watches the electrode-to-skin connection. If contact weakens, CH1 and/or CH2 flashes on the display. After 3 seconds of poor contact, intensity automatically drops to 60%. If contact returns within 30 seconds, it returns to the original setting; if not, intensity resets to zero.",
+    "How do I read the battery level indicator on my Ultima 5?":
+      "The battery icon uses a simple 2-bar display. Both bars mean the batteries are fully charged. One bar means they're around mid-level. If the battery symbol starts flashing, the batteries are low and it's time to recharge or replace them.",
+    "Does my Ultima 5 automatically shut off if I forget to turn it off?":
+      "Yes. If both channels are set to zero intensity and the unit hasn't been used for 5 minutes, it automatically powers down. If you're using a treatment timer, the unit also shuts off when the timer reaches zero.",
+    "What are Soft-Touch electrodes, and why do they matter?":
+      "Soft-Touch electrodes are PMT's premium reusable line: a non-porous tricot backing, conductive wire-mount layer, high-quality carbon layer, and extra-thick gel, with a snug pigtail connector. Oval corners minimize edge curl, and every pad uses latex-free USA gel in a resealable bag to stay fresh. They work well across TENS, EMS, interferential, microcurrent, and galvanic devices.",
+    "What's the difference between the Soft-Touch Silver and Clinical Grade electrode lines?":
+      'Both are premium reusable electrodes. The Silver series (SPS) uses a silver backing with ultra-low impedance and a gentle blue gel, great for sensitive skin, in sizes from 1.25" round up to 3" round. The Clinical Grade series (SP) uses a carbon backing with low-impedance blue gel and the widest size range, from a 1" round up to a 3.3"x6" butterfly pad.',
+    "How long do TENS pads last?":
+      "TENS electrodes typically last 10-30 uses,depending on the quality of the pads, skin preparation, and how they are stored. You may need to replace your pads when they no longer stick firmly, the gel begins to dry out, stimulation feels weaker or uneven, or the edges begin curling.",
+    "When should I replace the pads?":
+      "Replace your electrode pads when: they no longer stick firmly to the skin, the gel surface is dry or worn, stimulation feels uneven or weaker, or the edges begin to curl. Most pads last 10-30 uses depending on skin preparation and storage.",
+    "Why won't my pads stick anymore?":
+      "Electrode pads gradually lose their stickiness after repeated use because skin oils, moisture, and dust can build up on the gel surface. You can extend pad life by: cleaning and drying your skin before use, storing pads on the plastic backing sheet, keeping pads sealed in the storage bag, and avoiding touching the gel surface. If the pads no longer stay attached to your skin, it may be time to replace them.",
+    "How do I make my pads sticky again?":
+      "If your electrode pads begin losing their stickiness, try lightly moistening the gel surface with a few drops of water. Allow the pads to air dry briefly before placing them back on your skin. Avoid using soaps, alcohol, lotions, or cleaning chemicals on the pads, as these can damage the conductive gel. If the pads no longer stick well after cleaning, it is time to replace them.",
+    "Can I wash or clean electrode pads?":
+      "Most reusable TENS pads should not be washed with soap or cleaning chemicals. Instead, if the pads become less sticky, you can lightly moisten the gel surface with a few drops of water and allow them to air dry. Always store the pads on their plastic backing sheet and keep them sealed in the storage bag when not in use.",
+    "Are generic pads compatible with my unit?":
+      "Many TENS units use standard electrode connectors, which means compatible replacement pads from different manufacturers may work. However, connector types can vary. Before purchasing replacement pads, check the connector style used by your device, such as pin-style or snap-style connectors.",
+    "What pads are compatible with my unit?":
+      "Most TENS units use standard reusable electrode pads with either pin-style or snap-style connectors. To ensure compatibility, check the connector type on your lead wires before purchasing replacement pads.",
+    "What's the difference between 2 inch and 4 inch pads?":
+      "Pad size affects how the electrical stimulation is distributed. 2-inch pads provide more targeted stimulation and are ideal for smaller areas such as the neck, shoulders, knees, or arms. 4-inch pads spread the stimulation across a larger area and are often used for the lower back, hips, thighs, or other large muscle groups. Larger pads may also feel more comfortable at higher intensity levels because the electrical current is distributed across a wider surface area.",
+    "How do I know which pads are best for me?":
+      "The best electrode pads depend on the area you want to treat. Small pads (around 2 inches): best for neck, shoulders, knees, arms, and smaller pain areas. Large pads (3-4 inches): better for the lower back, hips, thighs, and larger muscle groups. If you are unsure, 2-inch square pads are a common all-purpose size for most TENS treatments.",
+    "What accessories should I buy with a TENS unit?":
+      "Common TENS accessories include: Replacement electrode pads, extra lead wires, rechargeable batteries, a carrying case, and larger or specialty electrode pads. Keeping spare pads and lead wires available can help ensure your device is always ready to use.",
+    "What batteries can I use in the Ultima 5?":
+      "The Ultima 5 can use two AA batteries. The manual permits 1.5V AA alkaline disposable batteries or 1.2V AA Ni-MH rechargeable batteries. Do not mix different battery types.",
+    "How long does the battery last?":
+      "Battery life depends on the device, battery type, and intensity level used. Many TENS units can operate for multiple hours of treatment before the batteries need to be replaced or recharged. Higher intensity levels may use more battery power.",
+    "Should I buy a rechargable batteries?":
+      "Rechargeable batteries can be a convenient and cost-effective option if you use your TENS unit frequently. They reduce the need to constantly replace disposable batteries and can be recharged between treatments. Make sure the rechargeable batteries are compatible with your device.",
+    "Where should I never place TENS pads?":
+      "Do not place TENS pads on: the front or sides of the neck, the head or face, directly over the spine, broken or irritated skin, numb areas with reduced sensation, directly over the heart, or across the chest. Avoid placing pads where the electrical current could travel through the chest or head.",
+    "Is it safe to use a TENS unit while sleeping?":
+      "It is generally not recommended to use a TENS unit while sleeping unless specifically instructed by a healthcare professional. While sleeping, the electrode pads could shift or the stimulation level could become uncomfortable without you noticing.",
+    "Can I drive while using a TENS unit?":
+      "It is not recommended to drive or operate heavy machinery while using a TENS unit. The electrical stimulation may cause unexpected muscle reactions or distraction. For safety, use your TENS unit while sitting, resting, or performing light activities.",
+    "Can I use TENS with a pacemaker?":
+      "If you have a pacemaker or implanted electronic device, you should consult your healthcare provider before using a TENS unit. Electrical stimulation may interfere with certain implanted devices. Avoid placing TENS pads near the chest or implanted device unless specifically approved by your doctor.",
+    "Is a TENS unit safe to use during pregnancy?":
+      "TENS may be used during pregnancy in some cases, but it is best to consult with your healthcare provider before use. Avoid placing electrode pads on the abdomen, lower back, or pelvic area during pregnancy unless specifically recommended by a medical professional.",
+    "Can I use a TENS unit if I have diabetes?":
+      "Many people with diabetes can use a TENS unit, but it is important to check with your healthcare provider if you have reduced sensation or neuropathy. If you have decreased feeling in certain areas, you may not be able to accurately judge the stimulation intensity. Avoid placing pads on areas with numbness, poor circulation, or damaged skin.",
+    "Can I use a TENS unit if I have metal implants?":
+      "In many cases, yes, TENS can be used with metal implants, such as joint replacements, screws, or plates. The electrical stimulation typically travels through the nerves and muscles near the surface of the skin and does not directly affect most metal implants. However, avoid placing pads directly over the implant site if it causes discomfort, and consult your healthcare provider if you have concerns.",
+    "Is there contradictions with medication?":
+      "TENS therapy generally does not interact with medications because it uses electrical stimulation rather than drugs. However, if you take medications that affect sensation, circulation, or nerve function, you should use caution when adjusting the intensity. Always follow your healthcare provider's recommendations if you are managing a medical condition.",
+    "Why does my skin turn red after treatment?":
+      "Mild redness under the electrode pads can occur after treatment and is usually caused by increased blood flow or mild skin irritation from the adhesive. The redness should fade shortly after removing the pads. If you experience persistent redness, itching, burning, or rash, stop using the pads and try a different electrode type designed for sensitive skin.",
+    "I am experiencing skin irritation -- why is that?":
+      "Skin irritation may be caused by: adhesive sensitivity, leaving pads on too long, using worn pads, or placing pads on irritated skin. If irritation occurs, stop treatment and allow the skin to recover. Consider using electrodes designed for sensitive skin.",
+    "What should I do with the electrode pads after treatment?":
+      "Turn the Ultima 5 off before removing the electrode pads. Carefully remove the pads from your skin, place them back on their clear plastic backing, and return them to their storage bag to help preserve the gel and adhesion.",
+    "How do I clean and store the unit?":
+      "Wipe the TENS unit with a soft, dry or slightly damp cloth. Do not submerge the device in water or use harsh cleaning chemicals. Store the unit in a cool, dry place and keep the electrode pads sealed in their storage bag on the plastic backing sheet.",
+    "What TENS unit is best for home use?":
+      "The best TENS unit for home use should be easy to operate, portable, and offer adjustable intensity levels and multiple stimulation modes. Look for features such as: Dual channels, adjustable intensity, multiple therapy modes, rechargeable or replaceable batteries, reusable electrode pads, and a clear digital display. The best device is one that is comfortable to use and provides the settings you need for your type of pain.",
+    "Is a prescription required?":
+      "Many TENS units designed for home use are available over the counter and do not require a prescription. However, some medical-grade devices may be provided through a healthcare professional or insurance provider. Check the device instructions or consult your healthcare provider if you are unsure.",
+    "What is interferential therapy?":
+      'Interferential therapy, also called interferential current or IFC therapy, is a form of electrical stimulation commonly used for pain management. It uses two medium-frequency electrical currents that interact, or "interfere," with each other to create a therapeutic beat frequency in the treatment area. The IF4D can provide interferential therapy using either two electrodes or four electrodes.',
+    "What is the difference between interferential therapy and TENS?":
+      "Both interferential therapy and TENS use electrical stimulation for pain management, but they deliver stimulation differently. TENS typically applies lower-frequency electrical pulses directly through the electrodes. Interferential therapy uses medium-frequency currents that interact to create a lower therapeutic beat frequency. The IF4D uses a 4000 Hz carrier frequency and can be used with either a 2-electrode bipolar setup or a 4-electrode quadripolar setup.",
+    "How long are interferential therapy sessions typically?":
+      "The IF4D includes selectable 15- or 30-minute treatment timers. Your treatment time should follow the instructions provided by your healthcare professional or treatment plan.",
+    "What is criss-cross pad application for interferential therapy?":
+      'Criss-cross pad application is a four-electrode placement used for interferential therapy. Four electrodes are positioned around the treatment area so the electrical currents from the two channels cross one another in an "X" pattern. The area where the two currents intersect becomes the targeted interferential treatment area. Electrode placement should follow your healthcare professional\'s instructions and the IF4D user guide.',
+    "What is the IF4D?":
+      "The IF4D is a dual-channel digital interferential therapy device designed for electrical stimulation treatments. It can be used with either two electrodes in a bipolar configuration or four electrodes in a quadripolar configuration. It offers adjustable frequency settings, multiple frequency sweep and shift options, a symmetrical balanced sine-wave waveform, treatment timers, setting recall, and a settings lock.",
+    "Can I use two or four electrodes with the IF4D?":
+      "Yes. The IF4D supports both bipolar treatment using two electrodes and quadripolar treatment using four electrodes. The appropriate configuration depends on your treatment plan and electrode placement instructions.",
+    "What treatment settings does the IF4D offer?":
+      "The IF4D offers Constant, Auto Sweep, and Frequency Shift treatment modes. It has an adjustable interference frequency from 4-160 Hz, along with preset sweep ranges and multiple frequency-shift options. Use the settings recommended by your healthcare professional for your treatment.",
+    "What kind of waveform does the IF4D use?":
+      "The IF4D uses a symmetrical balanced sine-wave waveform. Its interferential system uses a fixed 4000 Hz carrier frequency on one channel and an adjustable 4004-4160 Hz modulating frequency on the second channel.",
+    "What comes with the IF4D?":
+      "The IF4D includes the interferential unit, four reusable self-adhering electrodes, lead wires, a 9-volt battery, AC wall adapter, carrying case, and instruction manual.",
+    "Can the IF4D run on batteries or wall power?":
+      "Yes. The IF4D can operate using a 9-volt battery or the supplied AC wall adapter.",
+  };
+
+  const CONTACT_EMAIL = "info@paintechnology.com";
+  const WARRANTY_URL = "https://paintechnology.com/resources#warranty-info";
+
+  let thread = [];
+  let isTyping = false;
+  const storedFullscreen = localStorage.getItem("spark_widget_fullscreen");
+  let isFullscreen =
+    storedFullscreen !== null ? storedFullscreen === "true" : true;
+  let isMinimized = false;
+  let activeCategoryKey = null;
+  let answerReturnCategoryKey = null;
+
+  // Session-level asked questions tracking
+  let askedQuestionsSet = new Set();
+
+  function normalizeQ(str) {
+    return String(str || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "")
+      .trim();
+  }
+
+  const elShell = document.getElementById("pmtShell");
+  const elLauncher = document.getElementById("pmtLauncher");
+  const elScreen = document.getElementById("screen");
+  const btnResize = document.getElementById("btnResize");
+  const btnMinimize = document.getElementById("btnMinimize");
+  const btnClear = document.getElementById("btnClear");
+  const btnClose = document.getElementById("btnClose");
+  const elFreeText = document.getElementById("chatInput");
+  const btnSend = document.getElementById("btnSend");
+
+  // Manage Session ID & Activity Tracking
+  let sessionId = sessionStorage.getItem("spark_session_id");
+  if (!sessionId) {
+    sessionId =
+      "spark_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now();
+    sessionStorage.setItem("spark_session_id", sessionId);
+  }
+
+  let sessionStartedAt = sessionStorage.getItem("spark_session_started_at");
+  if (!sessionStartedAt) {
+    const parts = (sessionId || "").split("_");
+    const ts = Number(parts[parts.length - 1]);
+    if (!isNaN(ts) && ts > 1000000000000) {
+      sessionStartedAt = new Date(ts).toISOString();
+    } else {
+      sessionStartedAt = new Date().toISOString();
+    }
+    sessionStorage.setItem("spark_session_started_at", sessionStartedAt);
+  }
+
+  let cachedUserIp = sessionStorage.getItem("spark_user_ip") || "";
+
+  async function getUserIp() {
+    if (cachedUserIp) return cachedUserIp;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
+      const res = await fetch("https://api.ipify.org?format=json", {
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.ip) {
+          cachedUserIp = data.ip;
+          sessionStorage.setItem("spark_user_ip", cachedUserIp);
+          return cachedUserIp;
+        }
+      }
+    } catch (e) {
+      // Silently ignore network or timeout errors
+    }
+    return cachedUserIp || "";
+  }
+
+  // Pre-fetch IP quietly in background on startup
+  getUserIp();
+
+  function trackSessionActivity() {
+    // Asynchronous, fire-and-forget background execution (does not block chat)
+    setTimeout(async () => {
+      try {
+        const ip = await getUserIp();
+        const payload = {
+          session_id: sessionId,
+          started_at: sessionStartedAt,
+          last_activity: new Date().toISOString(),
+          user_agent: navigator.userAgent || "",
+          ip_address: ip || "",
+        };
+
+        fetch("https://n8n.srv917960.hstgr.cloud/webhook/session-duration", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }).catch((err) => {
+          console.warn("Session tracking webhook failed:", err);
+        });
+      } catch (err) {
+        console.warn("Session tracking error:", err);
+      }
+    }, 0);
+  }
+
+  function createSparkBotSvg(size = 20) {
+    const safeSize = Number.isFinite(Number(size)) ? Number(size) : 20;
+    return `<img
+      src="https://res.cloudinary.com/din7hkzcq/image/upload/v1786026169/Untitled_design_74_jyvfu3.png"
+      alt="Spark"
+      width="${safeSize}"
+      height="${safeSize}"
+      style="display:block; width:${safeSize}px; height:${safeSize}px; border-radius:999px; object-fit:cover;"
+    />`;
+  }
+
+  function escapeHtml(s) {
+    return String(s ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function getQuestionsForCategory(key) {
+    return CATEGORY_QUESTIONS[key] || [];
+  }
+  function getCategoryQuestionCount(key) {
+    return getQuestionsForCategory(key).length;
+  }
+
+  function getRelatedQuestions(userQuery, llmRelatedQuestions = []) {
+    const normUserQuery = normalizeQ(userQuery);
+    const candidates = [];
+    const addedNorms = new Set();
+
+    function addCandidate(q) {
+      if (!q || typeof q !== "string") return;
+      const trimmed = q.trim();
+      const norm = normalizeQ(trimmed);
+      if (!norm) return;
+      if (askedQuestionsSet.has(norm)) return;
+      if (addedNorms.has(norm)) return;
+      candidates.push(trimmed);
+      addedNorms.add(norm);
+    }
+
+    // 1. Add LLM-provided related questions first
+    if (Array.isArray(llmRelatedQuestions)) {
+      for (const q of llmRelatedQuestions) {
+        addCandidate(q);
+      }
+    }
+
+    // 2. Determine best matching category for userQuery
+    let bestCategoryKey = null;
+    let highestScore = 0;
+    const userWords = userQuery
+      .toLowerCase()
+      .split(/\W+/)
+      .filter((w) => w.length > 2);
+
+    for (const catKey of Object.keys(CATEGORY_QUESTIONS)) {
+      const questions = CATEGORY_QUESTIONS[catKey];
+      let score = 0;
+      const catObj = CATEGORIES.find((c) => c.key === catKey);
+      if (catObj) {
+        if (
+          userQuery.toLowerCase().includes(catObj.title.toLowerCase()) ||
+          userQuery.toLowerCase().includes(catKey.toLowerCase())
+        ) {
+          score += 5;
+        }
+      }
+      for (const q of questions) {
+        const qLower = q.toLowerCase();
+        for (const w of userWords) {
+          if (qLower.includes(w)) {
+            score += 1;
+          }
+        }
+      }
+      if (score > highestScore) {
+        highestScore = score;
+        bestCategoryKey = catKey;
+      }
+    }
+
+    if (!bestCategoryKey) {
+      bestCategoryKey = "treatment";
+    }
+
+    // Add questions from best matching category
+    if (CATEGORY_QUESTIONS[bestCategoryKey]) {
+      for (const q of CATEGORY_QUESTIONS[bestCategoryKey]) {
+        addCandidate(q);
+      }
+    }
+
+    // Top up from all other categories if needed to reach 3
+    for (const catKey of Object.keys(CATEGORY_QUESTIONS)) {
+      if (candidates.length >= 3) break;
+      if (catKey === bestCategoryKey) continue;
+      for (const q of CATEGORY_QUESTIONS[catKey]) {
+        addCandidate(q);
+        if (candidates.length >= 3) break;
+      }
+    }
+
+    return candidates.slice(0, 3);
+  }
+
+  function formatMessageText(text) {
+    if (!text) return "";
+    let clean = escapeHtml(text);
+    // Convert Markdown bullet asterisks (* item) at line start to bullet symbol •
+    clean = clean.replace(/^[\s]*\*\s+/gm, "• ");
+    // Convert Markdown bold **text** to <strong>text</strong>
+    clean = clean.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    // Convert Markdown italic *text* to <em>text</em>
+    clean = clean.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    // Convert Markdown links [label](url) into target="_blank" HTML links
+    clean = clean.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g,
+      (match, label, url) => {
+        return `<a href="${url}" target="_blank" rel="noopener" style="color: #00aca0; text-decoration: underline; font-weight: 500;">${label}</a>`;
+      },
+    );
+    // Convert newlines to paragraphs and breaks
+    clean = clean.replace(/\n\n+/g, "</p><p>").replace(/\n/g, "<br>");
+    return `<p>${clean}</p>`;
+  }
+
+  function createAskBoxMarkup() {
+    return `
+      <div class="googleAskWrap">
+        <div class="googleAskBox">
+          <textarea id="homePrompt" rows="1" placeholder="Ask Spark about TENS, IF4D, settings, placement, safety..." aria-label="Ask Spark a question"></textarea>
+          <button class="googleAskSend" onclick="window.pmtWidgetActions.submitHomePrompt()" aria-label="Send question">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transform: translateX(-1px);">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>`;
+  }
+
+  function renderHome() {
+    elShell.classList.add("spark-initial");
+    activeCategoryKey = null;
+    answerReturnCategoryKey = null;
+    document.querySelector(".composer").style.display = "none";
+    if (btnClear) btnClear.style.display = "none";
+    elScreen.classList.add("home-search-mode");
+    elScreen.innerHTML = `
+      <div class="thread">
+        ${createAskBoxMarkup()}
+        <div class="googleBrowseWrap">
+          <div class="quickSectionTitle">Browse support</div>
+          <div class="cardRow">
+            ${CATEGORIES.map(
+              (c) => `
+              <div class="homeCard" onclick="window.pmtWidgetActions.renderCategory('${escapeHtml(c.key)}')">
+                <div class="homeCardTitle">${escapeHtml(c.title)}</div>
+                <p class="homeCardSub">${escapeHtml(c.sub)}</p>
+                <div class="metaRow" style="margin-top:10px;">
+                  <span class="metaTag">${getCategoryQuestionCount(c.key)} questions</span>
+                </div>
+              </div>
+            `,
+            ).join("")}
+          </div>
+          <div class="talk-to-human-wrap">
+            <button class="talk-to-human-btn" onclick="window.pmtWidgetActions.openContact()" title="Talk to a Human">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+              <span>Talk to a Human</span>
+            </button>
+          </div>
+        </div>
+      </div>`;
+    elScreen.scrollTop = 0;
+    attachHomePromptEvents();
+  }
+
+  function renderCategory(key) {
+    elShell.classList.remove("spark-initial");
+    activeCategoryKey = key;
+    answerReturnCategoryKey = null;
+    const cat = CATEGORIES.find((x) => x.key === key);
+    const questions = getQuestionsForCategory(key);
+    document.querySelector(".composer").style.display = "none";
+    if (btnClear) btnClear.style.display = "none";
+    elScreen.classList.remove("home-search-mode");
+    elScreen.innerHTML = `
+      <div class="thread">
+        <div class="pmt-nav-bar">
+          <button class="pmt-nav-btn" onclick="window.pmtWidgetActions.renderHome()">← Back</button>
+          <button class="pmt-nav-btn pmt-nav-home" onclick="window.pmtWidgetActions.renderHome()">Home</button>
+        </div>
+        <div class="hero" style="padding:14px 16px;">
+          <h1 class="heroTitle" style="font-size:22px; margin-bottom:4px;">${escapeHtml(cat?.title || "Support")}</h1>
+          <p class="heroText" style="font-size:13px;">Tap a question or ask your own below.</p>
+        </div>
+        ${createAskBoxMarkup()}
+        <div class="quickSectionTitle">Common questions</div>
+        <div class="pmt-q-list">
+          ${questions
+            .map(
+              (q, i) => `
+            <button class="pmt-q-row" data-spark-question-index="${i}">
+              <span class="pmt-q-text">${escapeHtml(q)}</span>
+            </button>`,
+            )
+            .join("")}
+        </div>
+        <div class="talk-to-human-wrap">
+          <button class="talk-to-human-btn" onclick="window.pmtWidgetActions.openContact()" title="Talk to a Human">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+            </svg>
+            <span>Talk to a Human</span>
+          </button>
+        </div>
+      </div>`;
+    elScreen.scrollTop = 0;
+    elScreen
+      .querySelectorAll("[data-spark-question-index]")
+      .forEach((button) => {
+        button.addEventListener("click", () =>
+          ask(questions[Number(button.dataset.sparkQuestionIndex)], key),
+        );
+      });
+    attachHomePromptEvents();
+  }
+
+  function renderThread() {
+    elShell.classList.remove("spark-initial");
+    if (btnClear) btnClear.style.display = "";
+    document.querySelector(".composer").style.display = "flex";
+    elScreen.classList.remove("home-search-mode");
+
+    const backTarget = answerReturnCategoryKey;
+    const backButton = backTarget
+      ? `<button class="pmt-nav-btn" onclick="window.pmtWidgetActions.renderCategory('${escapeHtml(backTarget)}')">← Back to Questions</button>`
+      : `<button class="pmt-nav-btn" onclick="window.pmtWidgetActions.renderHome()">← Back</button>`;
+
+    elScreen.innerHTML = `
+      <div class="thread">
+        <div class="pmt-nav-bar">
+          ${backButton}
+          <button class="pmt-nav-btn pmt-nav-home" onclick="window.pmtWidgetActions.renderHome()">Home</button>
+        </div>
+        ${thread
+          .map((item, index) => {
+            const isLastMessage = index === thread.length - 1;
+            return item.role === "user"
+              ? `
+          <div class="message user">
+            <div class="bubbleWrap">
+              <div class="bubbleLabel">You</div>
+              <div class="bubble richAnswer">${formatMessageText(item.text)}</div>
+            </div>
+          </div>`
+              : `
+          <div class="message assistant">
+            <div class="avatar">${createSparkBotSvg(22)}</div>
+            <div class="bubbleWrap">
+              <div class="bubbleLabel">Spark</div>
+              <div class="bubble"><div class="richAnswer">${formatMessageText(item.text)}</div></div>
+              ${
+                !isTyping &&
+                isLastMessage &&
+                item.relatedQuestions &&
+                item.relatedQuestions.length > 0
+                  ? `
+                <div class="assistantActions" style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 10px;">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--pmt-dim); padding-left: 2px;">Related questions</div>
+                  <div style="display: flex; flex-direction: column; gap: 6px; width: 100%;">
+                    ${item.relatedQuestions
+                      .map(
+                        (rq) => `
+                      <button class="microPill" onclick="window.pmtWidgetActions.ask(this.dataset.question)" data-question="${escapeHtml(rq)}">${escapeHtml(rq)}</button>
+                    `,
+                      )
+                      .join("")}
+                  </div>
+                </div>
+              `
+                  : ""
+              }
+            </div>
+          </div>`;
+          })
+          .join("")}
+        ${isTyping ? `<div class="message assistant"><div class="avatar">${createSparkBotSvg(22)}</div><div class="bubbleWrap"><div class="bubble"><div class="typingBubble"><span></span><span></span><span></span></div></div></div></div>` : ""}
+      </div>`;
+    elScreen.scrollTop = elScreen.scrollHeight;
+  }
+
+  async function ask(q, sourceCategoryKey = null) {
+    if (!q || !q.trim()) return;
+
+    // Non-blocking asynchronous session duration tracking
+    trackSessionActivity();
+
+    const userQuery = q.trim();
+    askedQuestionsSet.add(normalizeQ(userQuery));
+
+    if (sourceCategoryKey) {
+      answerReturnCategoryKey = sourceCategoryKey;
+      activeCategoryKey = sourceCategoryKey;
+    } else {
+      answerReturnCategoryKey = null;
+    }
+
+    thread.push({ role: "user", text: userQuery });
+    isTyping = true;
+    renderThread();
+
+    const webhookUrl = `https://n8n.srv917960.hstgr.cloud/webhook/spark-chatbot?chatInput=${encodeURIComponent(userQuery)}&question=${encodeURIComponent(userQuery)}&sessionId=${encodeURIComponent(sessionId)}`;
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      let replyText = "";
+      let llmRelatedQuestions = [];
+
+      let targetObj = data;
+      if (Array.isArray(data) && data.length > 0) {
+        targetObj = data[0];
+      }
+
+      if (typeof targetObj === "string") {
+        try {
+          const parsed = JSON.parse(targetObj);
+          targetObj = parsed;
+        } catch (e) {}
+      }
+
+      if (typeof targetObj === "object" && targetObj !== null) {
+        replyText =
+          targetObj.text ||
+          targetObj.output ||
+          targetObj.message ||
+          targetObj.response ||
+          targetObj.answer ||
+          "";
+        if (Array.isArray(targetObj.relatedQuestions)) {
+          llmRelatedQuestions = targetObj.relatedQuestions;
+        } else if (Array.isArray(targetObj.related_questions)) {
+          llmRelatedQuestions = targetObj.related_questions;
+        } else if (Array.isArray(targetObj.related)) {
+          llmRelatedQuestions = targetObj.related;
+        }
+      } else if (typeof targetObj === "string") {
+        replyText = targetObj;
+      }
+
+      // Check if replyText is an embedded JSON string containing relatedQuestions
+      if (!llmRelatedQuestions.length && typeof replyText === "string") {
+        const jsonMatch =
+          replyText.match(/```(?:json)?\s*([\s\S]*?)\s*```/) ||
+          replyText.match(/(\{[\s\S]*"relatedQuestions"[\s\S]*\})/i);
+        if (jsonMatch) {
+          try {
+            const parsed = JSON.parse(jsonMatch[1]);
+            if (parsed.answer || parsed.text || parsed.output) {
+              replyText = parsed.answer || parsed.text || parsed.output;
+            }
+            if (Array.isArray(parsed.relatedQuestions)) {
+              llmRelatedQuestions = parsed.relatedQuestions;
+            }
+          } catch (e) {}
+        }
+      }
+
+      if (!replyText) {
+        replyText =
+          typeof data === "string"
+            ? data
+            : "Sorry, I couldn't retrieve an answer at this time.";
+      }
+
+      const relatedQs = getRelatedQuestions(userQuery, llmRelatedQuestions);
+      thread.push({
+        role: "assistant",
+        text: replyText,
+        relatedQuestions: relatedQs,
+      });
+    } catch (error) {
+      console.error("Spark Webhook Fetch Error:", error);
+      const fallbackAnswer =
+        KB_ANSWERS[userQuery] ||
+        KB_ANSWERS[
+          Object.keys(KB_ANSWERS).find(
+            (k) => k.toLowerCase() === userQuery.toLowerCase(),
+          )
+        ] ||
+        "Sorry, I couldn't connect to Spark right now. Please try again or contact support directly at info@paintechnology.com";
+      const relatedQs = getRelatedQuestions(userQuery, []);
+      thread.push({
+        role: "assistant",
+        text: fallbackAnswer,
+        relatedQuestions: relatedQs,
+      });
+    } finally {
+      isTyping = false;
+      renderThread();
+    }
+  }
+
+  function submitHomePrompt() {
+    const elHome = document.getElementById("homePrompt");
+    const val = elHome ? elHome.value : elFreeText.value;
+    if (val && val.trim()) {
+      if (elHome) elHome.value = "";
+      if (elFreeText) elFreeText.value = "";
+      ask(val);
+    }
+  }
+
+  function attachHomePromptEvents() {
+    const el = document.getElementById("homePrompt");
+    if (!el) return;
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        submitHomePrompt();
+      }
+    });
+  }
+
+  function openWidget() {
+    isMinimized = false;
+    elShell.classList.remove("minimized");
+    elShell.classList.add("open");
+    renderHome();
+  }
+  function closeWidget() {
+    elShell.classList.remove("open");
+  }
+
+  if (elLauncher) {
+    elLauncher.addEventListener("click", () => {
+      if (elShell.classList.contains("open")) closeWidget();
+      else openWidget();
+    });
+  }
+
+  if (btnClose) btnClose.addEventListener("click", closeWidget);
+  if (btnResize) {
+    btnResize.addEventListener("click", () => {
+      isFullscreen = !isFullscreen;
+      elShell.classList.toggle("fullscreen", isFullscreen);
+      localStorage.setItem("spark_widget_fullscreen", String(isFullscreen));
+    });
+  }
+  if (btnMinimize) {
+    btnMinimize.addEventListener("click", () => {
+      isMinimized = !isMinimized;
+      elShell.classList.toggle("minimized", isMinimized);
+    });
+  }
+  if (btnClear) {
+    btnClear.addEventListener("click", () => {
+      thread = [];
+      askedQuestionsSet.clear();
+      sessionId =
+        "spark_" +
+        Math.random().toString(36).substring(2, 11) +
+        "_" +
+        Date.now();
+      sessionStorage.setItem("spark_session_id", sessionId);
+      sessionStartedAt = new Date().toISOString();
+      sessionStorage.setItem("spark_session_started_at", sessionStartedAt);
+      renderHome();
+    });
+  }
+
+  btnSend.addEventListener("click", submitHomePrompt);
+  elFreeText.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      submitHomePrompt();
+    }
+  });
+
+  window.pmtWidgetActions = {
+    ask,
+    renderHome,
+    renderCategory,
+    submitHomePrompt,
+    openContact: () => openContactForm(),
+    openWarranty: () => window.open(WARRANTY_URL, "_blank"),
+  };
+
+  // ── Contact Form Logic ──
+  const contactOverlay = document.getElementById("pmtContactOverlay");
+  const contactForm = document.getElementById("pmtContactForm");
+  const contactCloseBtn = document.getElementById("pmtContactClose");
+
+  function openContactForm() {
+    contactOverlay.classList.add("open");
+    resetContactForm();
+    setTimeout(() => {
+      const first = document.getElementById("pmtFirstName");
+      if (first) first.focus();
+    }, 100);
+  }
+
+  function closeContactForm() {
+    contactOverlay.classList.remove("open");
+  }
+
+  function resetContactForm() {
+    contactForm.reset();
+    contactForm
+      .querySelectorAll(".pmt-invalid")
+      .forEach((el) => el.classList.remove("pmt-invalid"));
+    contactForm
+      .querySelectorAll(".pmt-form-error")
+      .forEach((el) => (el.textContent = ""));
+    // Restore form fields if showing success state
+    const successEl = contactForm.querySelector(".pmt-contact-success");
+    if (successEl) {
+      contactForm.innerHTML = contactFormOriginalHTML;
+    }
+    const submitBtn = document.getElementById("pmtContactSubmit");
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
+  const contactFormOriginalHTML = contactForm.innerHTML;
+
+  contactCloseBtn.addEventListener("click", closeContactForm);
+  contactOverlay.addEventListener("click", (e) => {
+    if (e.target === contactOverlay) closeContactForm();
+  });
+
+  function validateContactForm() {
+    let isValid = true;
+    const fields = [
+      {
+        id: "pmtFirstName",
+        errId: "errFirstName",
+        validate: (v) => {
+          if (!v.trim()) return "First name is required";
+          if (v.trim().length < 2) return "Must be at least 2 characters";
+          if (!/^[a-zA-Z\s\-']+$/.test(v.trim()))
+            return "Only letters, spaces, hyphens allowed";
+          return "";
+        },
+      },
+      {
+        id: "pmtLastName",
+        errId: "errLastName",
+        validate: (v) => {
+          if (!v.trim()) return "Last name is required";
+          if (v.trim().length < 2) return "Must be at least 2 characters";
+          if (!/^[a-zA-Z\s\-']+$/.test(v.trim()))
+            return "Only letters, spaces, hyphens allowed";
+          return "";
+        },
+      },
+      {
+        id: "pmtEmail",
+        errId: "errEmail",
+        validate: (v) => {
+          if (!v.trim()) return "Email is required";
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()))
+            return "Enter a valid email address";
+          return "";
+        },
+      },
+      {
+        id: "pmtPhone",
+        errId: "errPhone",
+        validate: (v) => {
+          if (!v.trim()) return "Phone number is required";
+          const digits = v.replace(/[^\d]/g, "");
+          if (digits.length < 7 || digits.length > 15)
+            return "Enter a valid phone number (7-15 digits)";
+          return "";
+        },
+      },
+      {
+        id: "pmtMessage",
+        errId: "errMessage",
+        validate: (v) => {
+          if (!v.trim()) return "Message is required";
+          if (v.trim().length < 10)
+            return "Message must be at least 10 characters";
+          return "";
+        },
+      },
+    ];
+
+    for (const field of fields) {
+      const input = document.getElementById(field.id);
+      const errEl = document.getElementById(field.errId);
+      const error = field.validate(input.value);
+      if (error) {
+        isValid = false;
+        input.classList.add("pmt-invalid");
+        if (errEl) errEl.textContent = error;
+      } else {
+        input.classList.remove("pmt-invalid");
+        if (errEl) errEl.textContent = "";
+      }
+    }
+
+    return isValid;
+  }
+
+  // Clear validation on input
+  ["pmtFirstName", "pmtLastName", "pmtEmail", "pmtPhone", "pmtMessage"].forEach(
+    (id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("input", () => {
+          el.classList.remove("pmt-invalid");
+          const errEl = el.parentElement.querySelector(".pmt-form-error");
+          if (errEl) errEl.textContent = "";
+        });
+      }
+    },
+  );
+
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!validateContactForm()) return;
+
+    const formData = {
+      firstName: document.getElementById("pmtFirstName").value.trim(),
+      lastName: document.getElementById("pmtLastName").value.trim(),
+      email: document.getElementById("pmtEmail").value.trim(),
+      phone: document.getElementById("pmtPhone").value.trim(),
+      message: document.getElementById("pmtMessage").value.trim(),
+      sessionId: sessionId,
+    };
+
+    const submitBtn = document.getElementById("pmtContactSubmit");
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      await fetch(
+        "https://n8n.srv917960.hstgr.cloud/webhook/support-ticket-spark",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
+    } catch (err) {
+      console.error("Contact form webhook error:", err);
+    }
+
+    // Show success state
+    const card = contactOverlay.querySelector(".pmt-contact-card");
+    const header = card.querySelector(".pmt-contact-header");
+    contactForm.innerHTML = `
+            <div class="pmt-contact-success">
+              <div class="pmt-success-icon">✓</div>
+              <h3>Message Sent!</h3>
+              <p>Thank you, ${escapeHtml(formData.firstName)}. Our team will get back to you shortly.</p>
+            </div>
+          `;
+
+    setTimeout(() => closeContactForm(), 3000);
+  });
+
+  renderHome();
+});
