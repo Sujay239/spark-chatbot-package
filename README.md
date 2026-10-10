@@ -1,6 +1,6 @@
 # Spark Chatbot Frontend Integration Guide
 
-This guide walks developers through integrating the redesigned Spark chatbot component ([v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html)) into the live Pain Management Technologies website page template as illustrated in [integration.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/integration.html).
+This guide walks developers through integrating the redesigned Spark chatbot component ([spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html)) into the live Pain Management Technologies website page template as illustrated in [integration.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/integration.html).
 
 ---
 
@@ -19,7 +19,7 @@ The live website page (`paintechnology.com/spark`) uses a universal header and f
       <img class="spark-header" src=".../spark-header.png">
 
       ┌───────────────────────────────────────────────────────┐
-      │  Spark Chatbot Embedded Component (v3.html)          │
+      │  Spark Chatbot Embedded Component (spark-chatbot.html)          │
       │  - Clean initial state (Search prompt + Category grid)│
       │  - "Talk to a Human" buttons & Support Ticket modal   │
       │  - Live n8n chat streaming & duration analytics       │
@@ -40,11 +40,11 @@ The live website page (`paintechnology.com/spark`) uses a universal header and f
 
 ## 2. Choosing an Integration Method
 
-There are **two supported methods** to integrate [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) into your CMS / template:
+There are **two supported methods** to integrate [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) into your CMS / template:
 
 | Feature | Method A: Native DOM Injection (Recommended) | Method B: Iframe Embedding |
 | :--- | :--- | :--- |
-| **Setup Complexity** | Low (Split CSS, HTML, JS into page template) | Low (Place `v3.html` on server & link via `iframe`) |
+| **Setup Complexity** | Low (Split CSS, HTML, JS into page template) | Low (Place `spark-chatbot.html` on server & link via `iframe`) |
 | **Mobile Responsiveness** | Seamless natural height, no nested scrollbars | Requires fixed height or `postMessage` resizer |
 | **CSS Isolation** | Scoped via `.pmt-*` and `.spark-*` classes | 100% isolated sandbox |
 | **Performance** | Faster (no secondary document initialization) | Secondary document loaded |
@@ -54,7 +54,7 @@ There are **two supported methods** to integrate [v3.html](file:///d:/Z_work/Suj
 
 ## 3. Method A: Native DOM Injection (Recommended)
 
-In this approach, you extract the 3 sections from [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) into your page view or layout template.
+In this approach, you extract the 3 sections from [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) into your page view or layout template.
 
 ### Step 1: External Fonts & Head Assets
 Ensure the Google Fonts for **Roboto** and **Roboto Condensed** are included in your page `<head>`:
@@ -67,14 +67,14 @@ Ensure the Google Fonts for **Roboto** and **Roboto Condensed** are included in 
 ```
 
 ### Step 2: Component Stylesheet
-Include the CSS from `<style>` in [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) into either your site's stylesheet bundle (e.g., `spark.css`) or directly in a `<style>` tag above `#bodyContent`:
+Include the CSS from `<style>` in [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) into either your site's stylesheet bundle (e.g., `spark.css`) or directly in a `<style>` tag above `#bodyContent`:
 
 ```html
 <link rel="stylesheet" href="/css/spark-chatbot.css" />
-<!-- OR embed the CSS directly from v3.html (lines 16-1448) -->
+<!-- OR embed the CSS directly from spark-chatbot.html (lines 16-1448) -->
 ```
 
-> **CSS Safety Note**: All styles in [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) are strictly scoped with `.pmt-`, `.spark-`, and `#pmtShell` prefixes to prevent leaking into global site navigation, cards, or footer styles.
+> **CSS Safety Note**: All styles in [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) are strictly scoped with `.pmt-`, `.spark-`, and `#pmtShell` prefixes to prevent leaking into global site navigation, cards, or footer styles.
 
 ### Step 3: Chatbot DOM Placement
 In [integration.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/integration.html) (inside `<section id="bodyContent"> <div class="container py-5">`), replace the old `<div class="spark-embedded-mockup">...</div>` with the following HTML component:
@@ -160,7 +160,7 @@ In [integration.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/integrat
 ```
 
 ### Step 4: JavaScript Logic
-Place the `<script>` block from [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) (lines 1529–2754) either:
+Place the `<script>` block from [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) (lines 1529–2754) either:
 1. In a standalone file (e.g. `<script src="/js/spark-chatbot.js"></script>`), or
 2. Right before the closing `</body>` tag of your template.
 
@@ -170,10 +170,10 @@ The script runs safely on `DOMContentLoaded` and initializes state without pollu
 
 ## 4. Method B: Iframe Embedding
 
-If you prefer to maintain 100% CSS and JS isolation without touching existing website scripts, deploy [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) as a standalone HTML page.
+If you prefer to maintain 100% CSS and JS isolation without touching existing website scripts, deploy [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) as a standalone HTML page.
 
 ### Step 1: Upload the file
-Deploy [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) to your server or public CDN path (e.g. `https://paintechnology.com/spark-embed.html` or `/assets/spark/v3.html`).
+Deploy [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) to your server or public CDN path (e.g. `https://paintechnology.com/spark-embed.html` or `/assets/spark/spark-chatbot.html`).
 
 ### Step 2: Replace iframe code in integration.html
 In [integration.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/integration.html) (lines 652–1398), replace the massive encoded `srcdoc` iframe with:
@@ -215,7 +215,7 @@ font-src 'self' https://fonts.gstatic.com;
 
 ## 6. Key Configuration Settings (In JavaScript)
 
-The following constants at lines 1640–1650 of [v3.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/v3.html) can be configured if endpoints or email addresses change:
+The following constants at lines 1640–1650 of [spark-chatbot.html](file:///d:/Z_work/Sujay/Spark%20-%20PMT%20chatbot/spark-chatbot.html) can be configured if endpoints or email addresses change:
 
 ```javascript
 const CHAT_WEBHOOK_URL = "https://n8n.srv917960.hstgr.cloud/webhook/spark-chatbot";
